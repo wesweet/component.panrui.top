@@ -1,37 +1,58 @@
-# ant-design-vue-two
+## 快速上手
+[使用文档](http://antprovue.components.miaoju.cn/start)
+### 使用组件
 
-#### 介绍
-基于ant-design-vue 2.0版本组件二次封装
+```js
+// 首次安装
+npm install mujoy-ui -S
 
-#### 软件架构
-软件架构说明
+// 版本更新
+npm update mujoy-ui
+```
 
+#### 完整引入
 
-#### 安装教程
+在 mian.js 中写入以下内容
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+```js
+import MjUI from 'mujoy-ui'
+import 'mujoy-ui/lib/mj-ui.css'
 
-#### 使用说明
+Vue.use(MjUI)
+```
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+#### 按需引入
 
-#### 参与贡献
+在具体组件中使用
 
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+```js
+import { MjUpload } from "mujoy-ui"
+exoprt default {
+  components:{
+    MjUpload
+  }
+}
+```
 
+#### 组件名列表
 
-#### 特技
+```js
+MjCountry: 多选带搜索保存插件
 
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+MjSelect：下拉带搜索
+
+MjSelectYear：年度选择
+
+MjCityPicker：省市县三级联动
+
+MjWangeditor：富文本编辑
+
+MjDateSelect：时间选择对比
+
+MjUpload：图片上传
+
+MjSelectCol：表格展示指定列
+
+MjPreview：图片预览
+
+```
