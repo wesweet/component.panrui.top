@@ -2,7 +2,7 @@
  * @Description:路由定义
  * @Author: panrui
  * @Date: 2021-05-21 18:02:50
- * @LastEditTime: 2023-04-17 09:21:16
+ * @LastEditTime: 2023-04-17 10:45:40
  * @LastEditors: panrui
  * 不忘初心,不负梦想
  */
@@ -92,7 +92,7 @@ const routes = [
 ];
 
 const router = new VueRouter({
-  mode: "history",
+  // mode: "history",
   base: process.env.BASE_URL,
   routes,
 });
