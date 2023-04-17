@@ -1,58 +1,35 @@
 ## 快速上手
-[使用文档](http://antprovue.components.miaoju.cn/start)
-### 使用组件
+[使用文档]()
 
+## 参考文档
+>  [基于 vue-cli3 打造属于自己的 UI 库](https://juejin.cn/post/6844903808787546125)
+
+## 开发目录
 ```js
-// 首次安装
-npm install mujoy-ui -S
+// example 
+测试目录
 
-// 版本更新
-npm update mujoy-ui
+// packages
+组件源码目录
+
+// lib
+npm 发布目录
+
+// dist
+线上展示目录
 ```
 
-#### 完整引入
-
-在 mian.js 中写入以下内容
+#### npm 构建发布流程
 
 ```js
-import MjUI from 'mujoy-ui'
-import 'mujoy-ui/lib/mj-ui.css'
 
-Vue.use(MjUI)
+// 构建
+npm run lib
+// 登录
+npm login
+// 发布
+npm publish
 ```
 
-#### 按需引入
 
-在具体组件中使用
 
-```js
-import { MjUpload } from "mujoy-ui"
-exoprt default {
-  components:{
-    MjUpload
-  }
-}
-```
-
-#### 组件名列表
-
-```js
-MjCountry: 多选带搜索保存插件
-
-MjSelect：下拉带搜索
-
-MjSelectYear：年度选择
-
-MjCityPicker：省市县三级联动
-
-MjWangeditor：富文本编辑
-
-MjDateSelect：时间选择对比
-
-MjUpload：图片上传
-
-MjSelectCol：表格展示指定列
-
-MjPreview：图片预览
-
-```

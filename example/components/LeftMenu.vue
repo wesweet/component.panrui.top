@@ -2,7 +2,7 @@
  * @Description: 左侧导航菜单
  * @Author: panrui
  * @Date: 2021-05-24 14:55:57
- * @LastEditTime: 2022-01-21 11:27:51
+ * @LastEditTime: 2023-04-17 09:20:17
  * @LastEditors: panrui
  * 不忘初心,不负梦想
 -->
@@ -18,8 +18,8 @@
       <router-link to="/changelog" tag="span">更新日志</router-link>
     </a-menu-item>
     <a-sub-menu key="4">
-      <span slot="title"> <span>Components(11)</span></span>
-      <a-menu-item key="4_1">
+      <span slot="title"> <span>Components</span></span>
+      <!-- <a-menu-item key="4_1">
         <router-link to="/country" tag="span">下拉搜索带保存</router-link>
       </a-menu-item>
       <a-menu-item key="4_2">
@@ -27,11 +27,11 @@
       </a-menu-item>
       <a-menu-item key="4_3">
         <router-link to="/selectYear" tag="span">年度选择</router-link>
-      </a-menu-item>
-      <a-menu-item key="4_4">
+      </a-menu-item> -->
+      <a-menu-item key="4_1">
         <router-link to="/cityPicker" tag="span">省市县联动</router-link>
       </a-menu-item>
-      <a-menu-item key="4_5">
+      <!-- <a-menu-item key="4_5">
         <router-link to="/wangeditor" tag="span">富文本编辑器</router-link>
       </a-menu-item>
       <a-menu-item key="4_6">
@@ -48,7 +48,7 @@
       </a-menu-item>
       <a-menu-item key="4_10">
         <router-link to="/twitter" tag="span">Twitter</router-link>
-      </a-menu-item>
+      </a-menu-item> -->
     </a-sub-menu>
   </a-menu>
 </template>

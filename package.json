@@ -1,23 +1,24 @@
 {
-  "name": "mujoy-ui",
-  "version": "1.0.13",
+  "name": "wesweet-vue-component",
+  "version": "1.0.1",
   "description": "基于 antd-design-vue 二次封装组件",
-  "main": "lib/mj-ui.umd.min",
-  "keywords": "mj-ui",
+  "main": "lib/pr-vue-ui.umd.min",
+  "keywords": [
+    "pr-vue-ui"
+  ],
   "private": false,
   "license": "MIT",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "lib": "vue-cli-service build --target lib --name mj-ui --dest lib packages/index.js"
+    "lib": "vue-cli-service build --target lib --name pr-vue-ui --dest lib packages/index.js"
   },
   "dependencies": {
     "ant-design-vue": "^1.7.5",
     "core-js": "^3.6.5",
     "github-markdown-css": "^4.0.0",
     "moment": "^2.29.1",
-    "mujoy-ui": "^0.2.2",
     "vue": "^2.6.11",
     "vue-i18n": "^8.24.4",
     "vue-router": "^3.2.0",

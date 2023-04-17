@@ -2,26 +2,30 @@
  * @Description: 主页
  * @Author: panrui
  * @Date: 2021-05-21 18:02:50
- * @LastEditTime: 2021-06-09 14:22:52
+ * @LastEditTime: 2023-04-17 09:25:58
  * @LastEditors: panrui
  * 不忘初心,不负梦想
 -->
 <template>
   <a-layout id="components-layout-demo-side" style="height: 100%">
+    <!-- 左侧 -->
     <a-layout-sider v-model="collapsed" collapsible>
       <div class="logo" />
       <LeftMenu></LeftMenu>
     </a-layout-sider>
+    <!-- 右侧 -->
     <a-layout>
+      <!-- 右侧顶部 -->
       <a-layout-header style="background: #001529; padding: 0; color: #fff">
-        妙聚组件
+        wesweet-vue-component
       </a-layout-header>
       <a-layout-content style="overflow-y: auto">
         <router-view></router-view>
       </a-layout-content>
-      <!-- <a-layout-footer style="text-align: center">
-        Ant Design ©2018 Created by Ant UED
-      </a-layout-footer> -->
+      <!-- 右侧底部 -->
+      <a-layout-footer style="text-align: center">
+        wesweet-vue-component ©2023 Created by panrui
+      </a-layout-footer>
     </a-layout>
   </a-layout>
 </template>

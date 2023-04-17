@@ -56,10 +56,10 @@
   </div>
 </template>
 <script>
-import pccode from "../../../example/assets/pc-code.json";
+import pccode from "../../../example/assets/pc-code.json"; // 导入城市json数据
 import pcacode from "../../../example/assets/pca-code.json";
 export default {
-  name: "MjCityPicker",
+  name: "PrCityPicker",
   props: {
     // 是否开启三级联动
     isLevel: {
