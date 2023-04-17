@@ -1,5 +1,5 @@
 ## 快速上手
-[使用文档]()
+[使用文档](http://wesweet_admin.gitee.io/ant-design-vue-two/#/start)
 
 ## 参考文档
 >  [基于 vue-cli3 打造属于自己的 UI 库](https://juejin.cn/post/6844903808787546125)
