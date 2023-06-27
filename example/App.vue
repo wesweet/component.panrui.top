@@ -2,7 +2,7 @@
  * @Description: 根节点入口
  * @Author: panrui
  * @Date: 2021-05-21 18:02:50
- * @LastEditTime: 2021-12-30 16:57:22
+ * @LastEditTime: 2023-06-27 13:33:11
  * @LastEditors: panrui
  * 不忘初心,不负梦想
 -->
@@ -12,7 +12,7 @@
   </div>
 </template>
 
-<style lang="scss">
+<style lang="less">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

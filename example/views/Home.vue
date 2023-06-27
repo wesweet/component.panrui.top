@@ -2,7 +2,7 @@
  * @Description: 主页
  * @Author: panrui
  * @Date: 2021-05-21 18:02:50
- * @LastEditTime: 2023-04-17 09:25:58
+ * @LastEditTime: 2023-06-27 13:33:29
  * @LastEditors: panrui
  * 不忘初心,不负梦想
 -->
@@ -45,7 +45,7 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped>
+<style lang="less" scoped>
 #components-layout-demo-side {
   .logo {
     height: 32px;

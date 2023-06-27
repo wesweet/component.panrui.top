@@ -24,6 +24,7 @@
     </a-row>
   </div>
 </template>
+
 <script>
 import cityPickerDocs from "@/mds/cityPickerDocs.md";
 export default {
@@ -41,7 +42,8 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped>
+
+<style lang="less" scoped>
 .city-picker-box {
   padding-left: 50px;
   padding-top: 20px;

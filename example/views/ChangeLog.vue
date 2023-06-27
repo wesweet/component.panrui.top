@@ -15,6 +15,7 @@
     </a-row>
   </div>
 </template>
+
 <script>
 import changeLogDocs from "@/mds/changeLogDocs.md";
 export default {
@@ -24,7 +25,8 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped>
+
+<style lang="less" scoped>
 .change-log-box {
   padding-left: 50px;
   padding-top: 20px;
