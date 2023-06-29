@@ -19,6 +19,12 @@
     </a-menu-item>
     <a-sub-menu key="4">
       <span slot="title"> <span>Components</span></span>
+      <a-menu-item key="4_1">
+        <router-link to="/cityPicker" tag="span">省市县联动</router-link>
+      </a-menu-item>
+      <a-menu-item key="4_2">
+        <router-link to="/ring" tag="span">环形进度条</router-link>
+      </a-menu-item>
       <!-- <a-menu-item key="4_1">
         <router-link to="/country" tag="span">下拉搜索带保存</router-link>
       </a-menu-item>
@@ -28,9 +34,6 @@
       <a-menu-item key="4_3">
         <router-link to="/selectYear" tag="span">年度选择</router-link>
       </a-menu-item> -->
-      <a-menu-item key="4_1">
-        <router-link to="/cityPicker" tag="span">省市县联动</router-link>
-      </a-menu-item>
       <!-- <a-menu-item key="4_5">
         <router-link to="/wangeditor" tag="span">富文本编辑器</router-link>
       </a-menu-item>

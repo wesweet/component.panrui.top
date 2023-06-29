@@ -2,14 +2,15 @@
  * @Description: 引入组件
  * @Author: panrui
  * @Date: 2021-05-21 18:23:19
- * @LastEditTime: 2023-04-17 08:59:13
+ * @LastEditTime: 2023-06-28 13:56:07
  * @LastEditors: panrui
  * 不忘初心,不负梦想
  */
+import PrCityPicker from "./citypicker";
+import PrRing from "./ring";
 // import MjCountry from "./country";
 // import MjSelect from "./select";
 // import MjSelectYear from "./selectyear";
-import PrCityPicker from "./citypicker";
 // import MjWangeditor from "./wangeditor";
 // import MjDateSelect from "./dateselect";
 // import MjUpload from "./upload";
@@ -23,6 +24,7 @@ const components = [
   // MjSelect,
   // MjSelectYear,
   PrCityPicker,
+  PrRing,
   // MjWangeditor,
   // MjDateSelect,
   // MjUpload,
@@ -51,6 +53,7 @@ export {
   // MjSelect,
   // MjSelectYear,
   PrCityPicker,
+  PrRing,
   // MjWangeditor,
   // MjDateSelect,
   // MjUpload,

@@ -2,7 +2,7 @@
  * @Description:路由定义
  * @Author: panrui
  * @Date: 2021-05-21 18:02:50
- * @LastEditTime: 2023-04-17 10:45:40
+ * @LastEditTime: 2023-06-27 13:36:28
  * @LastEditors: panrui
  * 不忘初心,不负梦想
  */
@@ -29,6 +29,16 @@ const routes = [
         name: "ChangeLog",
         component: () => import("../views/ChangeLog.vue"),
       },
+      {
+        path: "cityPicker",
+        name: "CityPicker",
+        component: () => import("../views/CityPicker.vue"),
+      },
+      {
+        path: "ring",
+        name: "Ring",
+        component: () => import("../views/Ring.vue"),
+      },
       // {
       //   path: "country",
       //   name: "Country",
@@ -44,11 +54,6 @@ const routes = [
       //   name: "SelectYear",
       //   component: () => import("../views/SelectYear.vue"),
       // },
-      {
-        path: "cityPicker",
-        name: "CityPicker",
-        component: () => import("../views/CityPicker.vue"),
-      },
       // {
       //   path: "wangeditor",
       //   name: "Wangeditor",
