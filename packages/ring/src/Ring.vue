@@ -13,88 +13,166 @@ export default {
   data() {
     return {
       canvas: null, // canvas 实例对象
-      cWidth: 300, // 预设宽度
-      cHeight: 300, // 预设高度
+      cWidth: 700, // 预设宽度
+      cHeight: 700, // 预设高度
       progress: 50, // 假设从接口获取的进度目前是 50
+      ctx: null, // 画布
+      radius: 124, // 外环半径
+      thickness: 12, // 圆环厚度
+      startAngle: -180, // 开始角度
+      endAngle: 0, // 结束角度
+      x: 0, // x坐标
+      y: 0, // y坐标
+      baseColor: "#0091FF", // 底色
     };
   },
   created() {},
   mounted() {
-    this.initCircleProgress();
+    this.initCanvas();
   },
   methods: {
-    initCircleProgress() {
+    // 初始化canvae
+    initCanvas() {
       // 初始化 canvas
-      let radius = 124; // 外环半径
-      let thickness = 12; // 圆环厚度
-      let innerRadius = radius - thickness; // 内环半径
-      let startAngle = -180; // 开始⾓度
-      let endAngle = 0; // 结束⾓度
-      let x = 0; // 圆⼼x坐标
-      let y = 0; // 圆⼼y坐标
-
+      let devicePixelRatio = window.devicePixelRatio > 1 || 1; // 获取设备像素比例
+      console.log(devicePixelRatio);
       this.canvas = this.$refs.canvas;
-      let ctx = this.canvas.getContext("2d");
-      this.canvas.width = this.cWidth; // 设置 canvas 宽度
-      this.canvas.height = this.cHeight; // 设置 canvas 高度
+      this.ctx = this.canvas.getContext("2d");
+      this.canvas.height = this.cHeight * devicePixelRatio; // 设置Canvas高度
+      this.canvas.width = this.cWidth * devicePixelRatio; // 设置Canvas宽度
+      this.ctx.scale(devicePixelRatio, devicePixelRatio); // 缩放上下文
       this.canvas.style.width = this.cWidth + "px"; // 设置 canvas css 宽度
       this.canvas.style.height = this.cHeight + "px"; // 设置 canvas css 高度
-      ctx.translate(this.cWidth / 2, this.cHeight / 2); // 将坐标原点移动到画布中心
-      ctx.fillStyle = "#0091FF"; // 设置填充颜色
-      // ctx.fillRect(-150, -150, 300, 300);
-      console.log(innerRadius, startAngle, endAngle, x, y);
-
-      this.renderRing(startAngle, endAngle, radius);
-      this.renderRing(endAngle, startAngle, innerRadius, true);
-      // this.canvas = this.$refs.canvas;
-      // this.canvas.width = this.cWidth;
-      // this.canvas.height = this.cHeight;
-      // this.canvas.style.width = this.cWidth / 2 + "px";
-      // this.canvas.style.height = this.cHeight / 2 + "px";
-      // this.canvas.style.borderRadius = "50%";
-      // this.canvas.style.backgroundColor = "#ccc";
-      // this.canvas.style.margin = "0 auto";
-      // this.canvas.style.display = "block";
-      // this.canvas.style.position = "relative";
-      // this.canvas.style.top = "0";
-      // this.canvas.style.left = "0";
-      // this.canvas.style.zIndex = "1";
-      // this.canvas.style.boxShadow = "0 0 10px #ccc";
-      // this.canvas.style.border = "1px solid #ccc";
-      // this.canvas.style.borderRadius = "50%";
-      // this.canvas.style.overflow = "hidden";
-      // this.canvas.style.transform = "scale(0.5)";
-      // this.canvas.style.transformOrigin = "0 0";
-      // // 绘制圆环
-      // this.drawCircle();
+      this.ctx.translate(this.cWidth / 2, this.cHeight / 2); // 将坐标原点移动到画布中心
+      this.ctx.fillStyle = "#fff"; // 设置填充颜色
+      this.ctx.fillRect(-350, -350, 700, 700); // 填充画布颜色
+      this.initCircleProgress();
     },
     // 角度转弧度
     angle2Radians(angle) {
       // 角度转弧度
       return (angle * Math.PI) / 180;
     },
-    renderRing(startAngle, endAngle, radius, clockwise = false) {
-      // 绘制圆环
-      let ctx = this.canvas.getContext("2d");
-      ctx.beginPath();
-      ctx.arc(
-        0,
-        0,
-        radius,
-        this.angle2Radians(startAngle),
-        this.angle2Radians(endAngle),
-        clockwise
-      );
-      // ctx.lineWidth = lineWidth;
-      ctx.strokeStyle = "#0091FF";
-      ctx.stroke();
-    },
+    // 计算圆环上某点坐标
     calcRingPoint(x, y, radius, angle) {
       // 计算圆环上某点坐标
       let point = {};
       point.x = x + radius * Math.cos(this.angle2Radians(angle));
       point.y = y + radius * Math.sin(this.angle2Radians(angle));
       return point;
+    },
+    // 绘画进度条
+    initCircleProgress() {
+      let that = this;
+      console.log(that);
+      // 顺时针画外环
+      this.ctx.beginPath();
+      this.ctx.arc(
+        this.x,
+        this.y,
+        this.radius,
+        this.angle2Radians(this.startAngle),
+        this.angle2Radians(this.endAngle)
+      );
+      this.ctx.strokeStyle = this.baseColor;
+      this.ctx.stroke();
+      this.ctx.closePath();
+      // 计算外环与内环终点连接处的中⼼坐标
+      this.ctx.beginPath();
+      let oneCtrlPoint = this.calcRingPoint(
+        this.x,
+        this.y,
+        this.radius - this.thickness / 2,
+        this.endAngle
+      );
+      this.ctx.arc(
+        oneCtrlPoint.x,
+        oneCtrlPoint.y,
+        this.thickness / 2,
+        this.angle2Radians(0),
+        this.angle2Radians(180)
+      );
+      this.ctx.strokeStyle = this.baseColor;
+      this.ctx.stroke();
+      this.ctx.closePath();
+      // 逆时针画内环
+      this.ctx.beginPath();
+      this.ctx.arc(
+        0,
+        0,
+        this.radius - this.thickness,
+        this.angle2Radians(this.endAngle),
+        this.angle2Radians(this.startAngle),
+        true
+      );
+      this.ctx.strokeStyle = this.baseColor;
+      this.ctx.stroke();
+      this.ctx.closePath();
+      // 计算外环与内环起点连接处的中心点坐标
+      this.ctx.beginPath();
+      let twoCtrlPoint = this.calcRingPoint(
+        this.x,
+        this.y,
+        this.radius - this.thickness / 2,
+        this.startAngle
+      );
+      this.ctx.arc(
+        twoCtrlPoint.x,
+        twoCtrlPoint.y,
+        this.thickness / 2,
+        this.angle2Radians(0),
+        this.angle2Radians(180)
+      );
+      if (this.progress > 0) {
+        this.ctx.fillStyle = this.baseColor;
+        this.ctx.fill();
+      } else {
+        this.ctx.strokeStyle = this.baseColor;
+        this.ctx.stroke();
+      }
+      this.ctx.closePath();
+      this.drawProcess(100);
+      this.drawProcess();
+    },
+    drawProcess(progress) {
+      let that = this;
+      let tempAngle = this.startAngle;
+      let total = 100; // 总进度
+      let percent = (progress || this.progress) / total;
+      let twoEndAngle = percent * 180 + this.startAngle; // 半圆原本是180，加长后是220
+      let step = (twoEndAngle - this.startAngle) / 100; // 设置步长速度
+      function animLoop() {
+        if (tempAngle < twoEndAngle) {
+          tempAngle += step;
+          let threeCtrlPoint = that.calcRingPoint(
+            that.x,
+            that.y,
+            that.radius - that.thickness / 2,
+            tempAngle
+          );
+          console.log(threeCtrlPoint);
+          that.ctx.beginPath();
+          that.ctx.arc(
+            threeCtrlPoint.x,
+            threeCtrlPoint.y,
+            that.thickness / 2,
+            that.angle2Radians(-90),
+            that.angle2Radians(270)
+          );
+          if (progress) {
+            that.ctx.fillStyle = that.baseColor;
+          } else {
+            let barGradient = that.ctx.createLinearGradient(0, 0, 100, 0);
+            barGradient.addColorStop(0, "#2193b0");
+            barGradient.addColorStop(1, "#ffdde1");
+            that.ctx.fillStyle = barGradient;
+          }
+          that.ctx.fill();
+          that.ctx.closePath();
+          window.requestAnimationFrame(animLoop);
+        }
+      }
+      animLoop();
     },
   },
 };
