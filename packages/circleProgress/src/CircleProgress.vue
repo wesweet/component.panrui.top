@@ -6,26 +6,53 @@
 
 <script>
 export default {
-  name: "PrRing",
-  props: {},
+  name: "PrCircleProgress",
+  // 定义组件prop
+  props: {
+    // 圆的半径
+    radius: {
+      type: Number,
+      default: 124,
+    },
+    // 圆环厚度
+    thickness: {
+      type: Number,
+      default: 12,
+    },
+    // 背景色
+    baseColor: {
+      type: String,
+      default: "#0091FF",
+    },
+    // 进度条颜色
+    barColor: {
+      type: Array,
+      default: () => {
+        return ["#73D8FF", "#FFAB39"];
+      },
+    },
+    // 进度
+    progress: {
+      type: Number,
+      default: 0,
+    },
+  },
   data() {
     return {
       canvas: null, // canvas 实例对象
       cWidth: 700, // 预设宽度
       cHeight: 700, // 预设高度
-      progress: 50, // 假设从接口获取的进度目前是 50
       ctx: null, // 画布
-      radius: 124, // 外环半径
-      thickness: 12, // 圆环厚度
       startAngle: 180, // 开始角度
       endAngle: 0, // 结束角度
       x: 0, // x坐标
       y: 0, // y坐标
-      baseColor: "#0091FF", // 底色
     };
   },
   created() {},
   mounted() {
+    this.cHeight = this.radius + this.thickness * 2;
+    this.cWidth = this.radius * 2 + this.thickness * 2;
     this.initCanvas();
   },
   methods: {
@@ -33,7 +60,6 @@ export default {
     initCanvas() {
       // 初始化 canvas
       let devicePixelRatio = window.devicePixelRatio > 1 || 1; // 获取设备像素比例
-      console.log(devicePixelRatio);
       this.canvas = this.$refs.canvas;
       this.ctx = this.canvas.getContext("2d");
       this.canvas.height = this.cHeight * devicePixelRatio; // 设置Canvas高度
@@ -41,7 +67,7 @@ export default {
       this.ctx.scale(devicePixelRatio, devicePixelRatio); // 缩放上下文
       this.canvas.style.width = this.cWidth + "px"; // 设置 canvas css 宽度
       this.canvas.style.height = this.cHeight + "px"; // 设置 canvas css 高度
-      this.ctx.translate(this.cWidth / 2, this.cHeight / 2); // 将坐标原点移动到画布中心
+      this.ctx.translate(this.cWidth / 2, this.cHeight - this.thickness); // 将坐标原点移动到画布中心
       this.ctx.fillStyle = "#fff"; // 设置填充颜色
       this.ctx.fillRect(-350, -350, 700, 700); // 填充画布颜色
       this.initCircleProgress();
@@ -61,8 +87,6 @@ export default {
     },
     // 绘画进度条
     initCircleProgress() {
-      let that = this;
-      console.log(that);
       // 画出总共进度条
       this.ctx.beginPath();
       this.ctx.arc(
@@ -92,16 +116,22 @@ export default {
       // 颜色使用渐变色
       // 获取终点坐标
       let point = this.calcRingPoint(this.x, this.y, this.radius, endAngle);
-      console.log(point);
       let barGradient = this.ctx.createLinearGradient(
         -this.radius,
         0,
         point.x,
         0
       );
-      barGradient.addColorStop(0, "#73D8FF");
-      barGradient.addColorStop(1, "#FFAB39");
-      this.ctx.strokeStyle = barGradient;
+      // 通过遍历颜色数组，将颜色添加到渐变色中
+      if (this.barColor.length === 1) {
+        this.ctx.strokeStyle = this.barColor[0];
+      } else {
+        let addColorStop = 1 / (this.barColor.length - 1);
+        this.barColor.forEach((item, index) => {
+          barGradient.addColorStop(index * addColorStop, item);
+        });
+        this.ctx.strokeStyle = barGradient;
+      }
       this.ctx.lineCap = "round";
       this.ctx.stroke();
       this.ctx.closePath();
@@ -164,7 +194,6 @@ export default {
             that.radius - that.thickness / 2,
             tempAngle
           );
-          console.log(threeCtrlPoint);
           that.ctx.beginPath();
           that.ctx.arc(
             threeCtrlPoint.x,

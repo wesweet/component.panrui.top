@@ -6,8 +6,8 @@
  * @LastEditors: panrui
  * 不忘初心,不负梦想
  */
-import PrCityPicker from "./citypicker";
-import PrRing from "./ring";
+import PrCityPicker from "./cityPicker";
+import PrCircleProgress from "./circleProgress";
 // import MjCountry from "./country";
 // import MjSelect from "./select";
 // import MjSelectYear from "./selectyear";
@@ -24,7 +24,7 @@ const components = [
   // MjSelect,
   // MjSelectYear,
   PrCityPicker,
-  PrRing,
+  PrCircleProgress,
   // MjWangeditor,
   // MjDateSelect,
   // MjUpload,
@@ -53,7 +53,7 @@ export {
   // MjSelect,
   // MjSelectYear,
   PrCityPicker,
-  PrRing,
+  PrCircleProgress,
   // MjWangeditor,
   // MjDateSelect,
   // MjUpload,

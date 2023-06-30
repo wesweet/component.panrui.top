@@ -2,7 +2,7 @@
  * @Description: 省市县联动组件文档
  * @Author: panrui
  * @Date: 2021-06-03 16:04:39
- * @LastEditTime: 2021-06-11 17:14:31
+ * @LastEditTime: 2023-06-30 17:17:37
  * @LastEditors: panrui
  * 不忘初心,不负梦想
 -->
@@ -10,13 +10,13 @@
 ## 使用
 
 ```html
-<mj-city-picker
+<pr-city-picker
   :isLevel="3"
   province="河北省"
   city="唐山市"
   area="路南区"
   :fnCallback="fnCallback"
-></mj-city-picker>
+></pr-city-picker>
 ```
 
 ## API

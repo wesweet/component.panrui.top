@@ -35,9 +35,9 @@ const routes = [
         component: () => import("../views/CityPicker.vue"),
       },
       {
-        path: "ring",
-        name: "Ring",
-        component: () => import("../views/Ring.vue"),
+        path: "circleProgress",
+        name: "CircleProgress",
+        component: () => import("../views/CircleProgress.vue"),
       },
       // {
       //   path: "country",
