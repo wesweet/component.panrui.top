@@ -1,7 +1,5 @@
 <template>
   <div class="box">
-    <!-- <div class="circle"></div>
-    <div class="circle-ring"></div> -->
     <canvas id="circleProgress" ref="canvas"></canvas>
   </div>
 </template>
@@ -19,7 +17,7 @@ export default {
       ctx: null, // 画布
       radius: 124, // 外环半径
       thickness: 12, // 圆环厚度
-      startAngle: -180, // 开始角度
+      startAngle: 180, // 开始角度
       endAngle: 0, // 结束角度
       x: 0, // x坐标
       y: 0, // y坐标
@@ -65,7 +63,7 @@ export default {
     initCircleProgress() {
       let that = this;
       console.log(that);
-      // 顺时针画外环
+      // 画出总共进度条
       this.ctx.beginPath();
       this.ctx.arc(
         this.x,
@@ -74,65 +72,81 @@ export default {
         this.angle2Radians(this.startAngle),
         this.angle2Radians(this.endAngle)
       );
+      this.ctx.lineWidth = this.thickness;
       this.ctx.strokeStyle = this.baseColor;
+      this.ctx.lineCap = "round";
       this.ctx.stroke();
       this.ctx.closePath();
+
+      // 获取终点角度
+      let endAngle = (1 - this.progress / 100) * 180;
+      this.ctx.beginPath();
+      this.ctx.arc(
+        this.x,
+        this.y,
+        this.radius,
+        this.angle2Radians(this.startAngle),
+        this.angle2Radians(-endAngle)
+      );
+      this.ctx.lineWidth = this.thickness;
+      // 颜色使用渐变色
+      // 获取终点坐标
+      let point = this.calcRingPoint(this.x, this.y, this.radius, endAngle);
+      console.log(point);
+      let barGradient = this.ctx.createLinearGradient(
+        -this.radius,
+        0,
+        point.x,
+        0
+      );
+      barGradient.addColorStop(0, "#73D8FF");
+      barGradient.addColorStop(1, "#FFAB39");
+      this.ctx.strokeStyle = barGradient;
+      this.ctx.lineCap = "round";
+      this.ctx.stroke();
+      this.ctx.closePath();
+
       // 计算外环与内环终点连接处的中⼼坐标
       this.ctx.beginPath();
-      let oneCtrlPoint = this.calcRingPoint(
-        this.x,
-        this.y,
-        this.radius - this.thickness / 2,
-        this.endAngle
-      );
       this.ctx.arc(
-        oneCtrlPoint.x,
-        oneCtrlPoint.y,
+        point.x,
+        -point.y,
         this.thickness / 2,
         this.angle2Radians(0),
-        this.angle2Radians(180)
+        this.angle2Radians(360)
       );
-      this.ctx.strokeStyle = this.baseColor;
-      this.ctx.stroke();
+      this.ctx.lineWidth = 1;
+      this.ctx.fillStyle = "#fff";
+      this.ctx.fill();
       this.ctx.closePath();
-      // 逆时针画内环
-      this.ctx.beginPath();
-      this.ctx.arc(
-        0,
-        0,
-        this.radius - this.thickness,
-        this.angle2Radians(this.endAngle),
-        this.angle2Radians(this.startAngle),
-        true
-      );
-      this.ctx.strokeStyle = this.baseColor;
-      this.ctx.stroke();
-      this.ctx.closePath();
+      // // 逆时针画内环
+
       // 计算外环与内环起点连接处的中心点坐标
-      this.ctx.beginPath();
-      let twoCtrlPoint = this.calcRingPoint(
-        this.x,
-        this.y,
-        this.radius - this.thickness / 2,
-        this.startAngle
-      );
-      this.ctx.arc(
-        twoCtrlPoint.x,
-        twoCtrlPoint.y,
-        this.thickness / 2,
-        this.angle2Radians(0),
-        this.angle2Radians(180)
-      );
-      if (this.progress > 0) {
-        this.ctx.fillStyle = this.baseColor;
-        this.ctx.fill();
-      } else {
-        this.ctx.strokeStyle = this.baseColor;
-        this.ctx.stroke();
-      }
-      this.ctx.closePath();
-      this.drawProcess(100);
-      this.drawProcess();
+      // 画白色点
+      // this.ctx.beginPath();
+      // let twoCtrlPoint = this.calcRingPoint(
+      //   this.x,
+      //   this.y,
+      //   this.radius - this.thickness / 2,
+      //   this.startAngle
+      // );
+      // this.ctx.arc(
+      //   twoCtrlPoint.x,
+      //   twoCtrlPoint.y,
+      //   this.thickness / 2,
+      //   this.angle2Radians(0),
+      //   this.angle2Radians(180)
+      // );
+      // if (this.progress > 0) {
+      //   this.ctx.fillStyle = this.baseColor;
+      //   this.ctx.fill();
+      // } else {
+      //   this.ctx.strokeStyle = this.baseColor;
+      //   this.ctx.stroke();
+      // }
+      // this.ctx.closePath();
+      // this.drawProcess(100);
+      // this.drawProcess();
     },
     drawProcess(progress) {
       let that = this;
@@ -200,14 +214,4 @@ export default {
   border: 10px solid transparent;
   background-origin: border-box;
 }
-
-// .ring {
-//   width: 200px;
-//   height: 200px;
-//   border-radius: 50%;
-//   border: 10px solid #ccc;
-//   border-top-color: #f00;
-//   border-left-color: aqua;
-//   animation: ring 1s infinite linear;
-// }
 </style>
