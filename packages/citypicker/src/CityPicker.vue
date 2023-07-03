@@ -2,7 +2,7 @@
  * @Description: 城市联动组件
  * @Author: panrui
  * @Date: 2021-06-03 15:46:23
- * @LastEditTime: 2021-07-15 15:04:08
+ * @LastEditTime: 2023-07-03 09:53:01
  * @LastEditors: panrui
  * 不忘初心,不负梦想
 -->
@@ -55,6 +55,7 @@
     </a-row>
   </div>
 </template>
+
 <script>
 import pccode from "../../../example/assets/pc-code.json"; // 导入城市json数据
 import pcacode from "../../../example/assets/pca-code.json";
