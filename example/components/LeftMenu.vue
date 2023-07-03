@@ -25,6 +25,9 @@
       <a-menu-item key="4_2">
         <router-link to="/circleProgress" tag="span">环形进度条</router-link>
       </a-menu-item>
+      <a-menu-item key="4_3">
+        <router-link to="/sign" tag="span">签名</router-link>
+      </a-menu-item>
       <!-- <a-menu-item key="4_1">
         <router-link to="/country" tag="span">下拉搜索带保存</router-link>
       </a-menu-item>

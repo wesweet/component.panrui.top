@@ -2,12 +2,13 @@
  * @Description: 引入组件
  * @Author: panrui
  * @Date: 2021-05-21 18:23:19
- * @LastEditTime: 2023-06-28 13:56:07
+ * @LastEditTime: 2023-07-03 09:29:25
  * @LastEditors: panrui
  * 不忘初心,不负梦想
  */
 import PrCityPicker from "./cityPicker";
 import PrCircleProgress from "./circleProgress";
+import PrSign from "./sign";
 // import MjCountry from "./country";
 // import MjSelect from "./select";
 // import MjSelectYear from "./selectyear";
@@ -20,11 +21,12 @@ import PrCircleProgress from "./circleProgress";
 
 // 所有组件列表
 const components = [
+  PrCityPicker,
+  PrCircleProgress,
+  PrSign,
   // MjCountry,
   // MjSelect,
   // MjSelectYear,
-  PrCityPicker,
-  PrCircleProgress,
   // MjWangeditor,
   // MjDateSelect,
   // MjUpload,
@@ -54,6 +56,7 @@ export {
   // MjSelectYear,
   PrCityPicker,
   PrCircleProgress,
+  PrSign,
   // MjWangeditor,
   // MjDateSelect,
   // MjUpload,

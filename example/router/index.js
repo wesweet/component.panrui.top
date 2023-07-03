@@ -39,6 +39,11 @@ const routes = [
         name: "CircleProgress",
         component: () => import("../views/CircleProgress.vue"),
       },
+      {
+        path: "sign",
+        name: "Sign",
+        component: () => import("../views/Sign.vue"),
+      },
       // {
       //   path: "country",
       //   name: "Country",
