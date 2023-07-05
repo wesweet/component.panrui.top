@@ -1,7 +1,13 @@
 <template>
   <div class="box">
     <a-card title="sign组件使用展示" style="width: 500px">
-      <pr-sign></pr-sign>
+      <pr-sign
+        :cWidth="cWidth"
+        :cHeight="cHeight"
+        :lineWidth="lineWidth"
+        :lineColor="lineColor"
+        :isCrop="isCrop"
+      ></pr-sign>
     </a-card>
   </div>
 </template>
@@ -11,12 +17,11 @@ export default {
   name: "Sign",
   data() {
     return {
-      canvas: null, // canvas 实例对象
-      cWidth: 700, // 预设宽度
-      cHeight: 700, // 预设高度
-      ctx: null, // 画布
-      x: 0, // x坐标
-      y: 0, // y坐标
+      cWidth: 300, // 预设宽度
+      cHeight: 300, // 预设高度
+      lineWidth: 2, // 线条宽度
+      lineColor: "#000", // 线条颜色
+      isCrop: false, // 是否裁剪
     };
   },
   created() {},

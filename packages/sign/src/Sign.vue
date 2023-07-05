@@ -13,15 +13,38 @@
 export default {
   name: "PrSign",
   // 定义组件prop
-  props: {},
+  props: {
+    // 线条宽度
+    lineWidth: {
+      type: Number,
+      default: 4,
+    },
+    // 线条颜色
+    lineColor: {
+      type: String,
+      default: "#000",
+    },
+    // 是否裁剪
+    isCrop: {
+      type: Boolean,
+      default: false,
+    },
+    // 画板宽度
+    cWidth: {
+      type: Number,
+      default: 350,
+    },
+    // 画板高度
+    cHeight: {
+      type: Number,
+      default: 350,
+    },
+  },
   data() {
     return {
       canvas: null, // canvas 实例对象
-      cWidth: 350, // 预设宽度
-      cHeight: 350, // 预设高度
       ctx: null, // 画布
-      x: 0, // x坐标
-      y: 0, // y坐标
+      canvasRect: null, // Dom元素的位置信息
       startX: 0,
       startY: 0,
       endX: 0,
@@ -56,19 +79,55 @@ export default {
       this.canvas.height = this.cHeight;
       this.canvas.style.width = this.cWidth + "px"; // 设置 canvas css 宽度
       this.canvas.style.height = this.cHeight + "px"; // 设置 canvas css 高度
+      this.canvasRect = this.canvas.getBoundingClientRect(); // 获取canvas元素的位置信息
     },
     // 鼠标按下
     mousedown(e) {
       e.preventDefault();
-      console.log(e);
+      this.isDrawing = true;
+      this.startX = e.offsetX;
+      this.startY = e.offsetY;
+
+      this.endX = this.startX;
+      this.endY = this.startY;
+
+      this.draw();
     },
     // 鼠标移动
-    mousemove() {
-      //   console.log(e);
+    mousemove(e) {
+      e.preventDefault();
+      if (this.isDrawing) {
+        this.endX = e.offsetX;
+        this.endY = e.offsetY;
+        this.draw();
+        this.startX = this.endX;
+        this.startY = this.endY;
+      }
     },
     // 鼠标抬起
     mouseup(e) {
-      console.log(e);
+      e.preventDefault();
+      this.isDrawing = false;
+      let imgData = this.ctx.getImageData(
+        0,
+        0,
+        this.canvas.width,
+        this.canvas.height
+      );
+      this.storageSteps.push(imgData);
+    },
+    draw() {
+      this.ctx.beginPath();
+      this.ctx.moveTo(this.startX, this.startY);
+      this.ctx.lineTo(this.endX, this.endY);
+      this.ctx.lineCap = "round";
+      this.ctx.lineJoin = "round";
+      this.ctx.lineWidth = this.lineWidth;
+      this.ctx.strokeStyle = this.lineColor;
+      this.ctx.stroke();
+      this.ctx.closePath();
+
+      this.isEmpty = false;
     },
   },
 };
